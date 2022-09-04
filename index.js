@@ -1,26 +1,33 @@
 // **** OPERATOR FUNCTIONS **** //
-function add(value1, value2) {
-    let answer = value1 + value2;
+
+function add(values) {
+    let answer = values.reduce((total, number) => {
+        return total += number;
+    }, 0);
     return answer
 }
 
-function subtract(value1, value2) {
-    let answer = value1 - value2;
-    return answer
-}
+// function subtract(value1, value2) {
+//     let answer = value1 - value2;
+//     return answer
+// }
 
-function multiply(value1, value2) {
-    let answer = value1 * value2;
-    return answer
-}
+// function multiply(value1, value2) {
+//     let answer = value1 * value2;
+//     return answer
+// }
 
-function divide(value1, value2) {
-    let answer = value1 / value2;
-    return answer
-}
+// function divide(value1, value2) {
+//     let answer = value1 / value2;
+//     return answer
+// }
 
-function operate(operator, value1, value2) {
-    let answer = operator(value1, value2)
+// function operate(operator, value1, value2) {
+//     let answer = operator(value1, value2)
+//     return answer
+// }
+function operate(operator, values) {
+    let answer = operator(values)
     return answer
 }
 
@@ -135,7 +142,8 @@ btnEqual.addEventListener("click", () => {
     const valuesNums = values.map(str => {
         return Number(str);
       });
-    operateValue = operate(add, ...valuesNums);
+    operateValue = operate(add, valuesNums);
+    console.log(operateValue);
     display.textContent = operateValue;
 })
 
