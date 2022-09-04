@@ -7,25 +7,21 @@ function add(values) {
     return answer
 }
 
-// function subtract(value1, value2) {
-//     let answer = value1 - value2;
-//     return answer
-// }
+function subtract(values) {
+    let answer = values.reduce((total, number) => total -= number )
+    return answer
+}
 
-// function multiply(value1, value2) {
-//     let answer = value1 * value2;
-//     return answer
-// }
+function multiply(values) {
+    let answer = values.reduce((total, number) => total *= number);
+    return answer
+}
 
-// function divide(value1, value2) {
-//     let answer = value1 / value2;
-//     return answer
-// }
+function divide(values) {
+    let answer = values.reduce((total, number) => total /= number);
+    return answer
+}
 
-// function operate(operator, value1, value2) {
-//     let answer = operator(value1, value2)
-//     return answer
-// }
 function operate(operator, values) {
     let answer = operator(values)
     return answer
