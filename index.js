@@ -128,8 +128,6 @@ btnAdd.addEventListener("click", () => {
     values.push(`${addValue}`)
     displayValue = "0";
     display.textContent = displayValue;
-
-    console.log(values);
 })
 
 btnEqual.addEventListener("click", () => {
@@ -139,12 +137,12 @@ btnEqual.addEventListener("click", () => {
         return Number(str);
       });
     operateValue = operate(add, valuesNums);
-    console.log(operateValue);
     display.textContent = operateValue;
 })
 
 // Display Event Listeners
 btnClear.addEventListener("click", () => {
+    values = [];
     displayValue = "0"
     display.textContent = displayValue;
 })
