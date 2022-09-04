@@ -50,7 +50,6 @@ const btnClear = document.querySelector("#btn-clear")
 // Function to clear display when number input
 function removeZero() {
     if(display.textContent === "0") {
-        console.log("hello");
         displayValue = " ";
     }
 }
@@ -115,6 +114,11 @@ btn0.addEventListener("click", () => {
     displayValue += "0";
     display.textContent = displayValue;
  })
+
+btnClear.addEventListener("click", () => {
+    displayValue = "0"
+    display.textContent = displayValue;
+})
 
 
 
