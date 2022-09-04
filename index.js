@@ -25,8 +25,11 @@ function operate(operator, value1, value2) {
 }
 
 // **** DISPLAY FUNCTIONS **** //
-// Initiliase display and calc value 
+// Initiliase display 
 let displayValue = 0;
+
+// Values array
+let values =  [];
 
 // DOM Elements
 let display = document.querySelector(".display")
@@ -50,11 +53,12 @@ const btnClear = document.querySelector("#btn-clear")
 // Function to clear display when number input
 function removeZero() {
     if(display.textContent === "0") {
-        displayValue = " ";
+        displayValue = "";
     }
+    return;
 }
 
-// Button Events Listeners
+// Number Event Listeners
 btn1.addEventListener("click", () => {
    removeZero()
    displayValue += "1";
@@ -115,10 +119,29 @@ btn0.addEventListener("click", () => {
     display.textContent = displayValue;
  })
 
+// Math Operator Event Listeners
+btnAdd.addEventListener("click", () => {
+    addValue = Number(displayValue)
+    values.push(`${addValue}`)
+    displayValue = "0";
+    display.textContent = displayValue;
+
+    console.log(values);
+})
+
+btnEqual.addEventListener("click", () => {
+    addValue = Number(displayValue)
+    values.push(`${addValue}`)
+    const valuesNums = values.map(str => {
+        return Number(str);
+      });
+    operateValue = operate(add, ...valuesNums);
+    display.textContent = operateValue;
+})
+
+// Display Event Listeners
 btnClear.addEventListener("click", () => {
     displayValue = "0"
     display.textContent = displayValue;
 })
-
-
 
