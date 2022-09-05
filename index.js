@@ -137,6 +137,7 @@ btn0.addEventListener("click", () => {
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
     if(!operand1 && !operand2) {
+        operator = add;
         operand1 = Number(displayValue)
         display.textContent = "0";
     }
@@ -177,11 +178,12 @@ btnSubtract.addEventListener("click", () => {
 })
 
 btnEqual.addEventListener("click", () => {
-    operand1 = Number(displayValue)
+    if(!operand1) {
+        operand1 = Number(displayValue)
+    }
     operateValue = operate(operator, operand1, operand2);
     displayValue = operateValue
     display.textContent = displayValue;
-    pressed = false;
 })
 
 // Display Event Listeners
