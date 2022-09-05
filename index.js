@@ -34,6 +34,8 @@ let displayValue = 0;
 // Values array
 let values =  [];
 
+let operator = "";
+
 // DOM Elements
 let display = document.querySelector(".display")
 const btn1 = document.querySelector("#btn-1")
@@ -117,7 +119,6 @@ btn9.addEventListener("click", () => {
  })
 
 btn0.addEventListener("click", () => {
-    removeZero()
     displayValue += "0";
     display.textContent = displayValue;
  })
@@ -126,8 +127,35 @@ btn0.addEventListener("click", () => {
 btnAdd.addEventListener("click", () => {
     addValue = Number(displayValue)
     values.push(`${addValue}`)
+    if (values.length >= 2) {
+        const valuesNums = values.map(str => {
+            return Number(str);
+          });
+        operateValue = operate(operator, valuesNums);
+        display.textContent = operateValue;
+    }
+    else {
+    operator = add;
     displayValue = "0";
     display.textContent = displayValue;
+    }
+})
+
+btnSubtract.addEventListener("click", () => {
+    addValue = Number(displayValue)
+    values.push(`${addValue}`)
+    if (values.length >= 2) {
+        const valuesNums = values.map(str => {
+            return Number(str);
+          });
+        operateValue = operate(operator, valuesNums);
+        display.textContent = operateValue;
+    }
+    else {
+    operator = subtract;
+    displayValue = "0";
+    display.textContent = displayValue;
+    }
 })
 
 btnEqual.addEventListener("click", () => {
@@ -136,7 +164,7 @@ btnEqual.addEventListener("click", () => {
     const valuesNums = values.map(str => {
         return Number(str);
       });
-    operateValue = operate(add, valuesNums);
+    operateValue = operate(operator, valuesNums);
     display.textContent = operateValue;
 })
 
