@@ -39,7 +39,7 @@ let operand1
 
 let operand2
 
-let pressed = false;
+let zeroGone = false;
 
 
 
@@ -67,7 +67,7 @@ function removeZero() {
     if(display.textContent === "0") {
         displayValue = "";
     }
-    if(operand2) {
+    if(operand1) {
         displayValue = "";
     }
     return;
@@ -152,29 +152,35 @@ btnAdd.addEventListener("click", () => {
     if(operand1 && operand2) {
         operator = add;
         operateValue = operate(operator, operand1, operand2);
-        operand1 = "";
-        operand2 = operateValue
-        display.textContent = operand2;
+        operand1 = operateValue
+        operand2 = "";
+        display.textContent = operand1;
     }
     
 })
 
 btnSubtract.addEventListener("click", () => {
-    addValue = Number(displayValue)
-    values.push(`${addValue}`)
-    if (values.length >= 2) {
-        const valuesNums = values.map(str => {
-            return Number(str);
-          });
-        operateValue = operate(operator, valuesNums);
-        displayValue = operateValue
-        display.textContent = displayValue;
+    if(!operand1 && !operand2) {
+        operator = subtract;
+        operand1 = Number(displayValue)
+        display.textContent = "0";
     }
-    else {
-    operator = subtract;
-    // displayValue = "0";
-    display.textContent = displayValue;
+    else if(operand1 && !operand2) {
+        operand2 = Number(displayValue)
+        display.textContent = "0";
     }
+    else if(operand1 && !operand2 ) {
+        operand1 = Number(displayValue) 
+    }
+
+    if(operand1 && operand2) {
+        operator = subtract;
+        operateValue = operate(operator, operand1, operand2);
+        operand1 = operateValue
+        operand2 = "";
+        display.textContent = operand1;
+    }
+    
 })
 
 btnEqual.addEventListener("click", () => {
