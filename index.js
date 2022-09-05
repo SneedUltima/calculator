@@ -27,17 +27,20 @@ function operate(operator, value1, value2) {
 
 // **** DISPLAY FUNCTIONS **** //
 // Initiliase display 
-let displayValue = 0;
+let displayValue = "";
 
 // Values array
 
 let operator = "";
 
-let operand1 = "";
+let newNumber
 
-let operand2 = "";
+let operand1 
+
+let operand2
 
 let pressed = false;
+
 
 
 // DOM Elements
@@ -62,6 +65,9 @@ const btnClear = document.querySelector("#btn-clear")
 // Function to clear display when number input
 function removeZero() {
     if(display.textContent === "0") {
+        displayValue = "";
+    }
+    if(operand2) {
         displayValue = "";
     }
     return;
@@ -130,35 +136,24 @@ btn0.addEventListener("click", () => {
 
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
-    // pressed = true;
-    // addValue = Number(displayValue)
-    // values.push(`${addValue}`)
-    // if (values.length >= 2) {
-    //     const valuesNums = values.map(str => {
-    //         return Number(str);
-    //       });
-    //     operateValue = operate(operator, valuesNums);
-    //     displayValue = operateValue
-    //     display.textContent = displayValue;
-    // }
-    // else {
-    // operator = add;
-    // displayValue = "0";
-    // display.textContent = displayValue;
-    // }
-    if (pressed === false)
-    {
+    if(!operand1 && !operand2) {
         operand1 = Number(displayValue)
-        pressed = true
-        operator = add;
-        displayValue = "0";
-        display.textContent = displayValue;
+        display.textContent = "0";
     }
-    else {
+    else if(operand1 && !operand2) {
         operand2 = Number(displayValue)
+        display.textContent = "0";
+    }
+    else if(!operand1 && operand2 ) {
+        operand1 = Number(displayValue) 
+    }
+
+    if(operand1 && operand2) {
+        operator = add;
         operateValue = operate(operator, operand1, operand2);
-        displayValue = operateValue
-        display.textContent = displayValue;
+        operand1 = "";
+        operand2 = operateValue
+        display.textContent = operand2;
     }
     
 })
@@ -182,18 +177,21 @@ btnSubtract.addEventListener("click", () => {
 })
 
 btnEqual.addEventListener("click", () => {
-    operand2 = Number(displayValue)
+    operand1 = Number(displayValue)
     operateValue = operate(operator, operand1, operand2);
     displayValue = operateValue
     display.textContent = displayValue;
+    pressed = false;
 })
 
 // Display Event Listeners
 btnClear.addEventListener("click", () => {
     operator = "";
-    operand1 = ""
-    operand2 = ""
-    displayValue = "0"
+    operand1 = "";
+    operand2 = "";
+    newNumber = "";
+    displayValue = "0";
+    pressed = false;
     display.textContent = displayValue;
 })
 
