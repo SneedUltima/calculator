@@ -1,29 +1,27 @@
 // **** OPERATOR FUNCTIONS **** //
 
-function add(values) {
-    let answer = values.reduce((total, number) => {
-        return total += number;
-    }, 0);
+function add(value1, value2) {
+    let answer = value1 + value2
     return answer
 }
 
-function subtract(values) {
-    let answer = values.reduce((total, number) => total -= number )
+function subtract(value1, value2) {
+    let answer = value1 - value2
     return answer
 }
 
-function multiply(values) {
-    let answer = values.reduce((total, number) => total *= number);
+function multiply(value1, value2) {
+    let answer = value1 * value2
     return answer
 }
 
-function divide(values) {
-    let answer = values.reduce((total, number) => total /= number);
+function divide(value1, value2) {
+    let answer = value1 / value2
     return answer
 }
 
-function operate(operator, values) {
-    let answer = operator(values)
+function operate(operator, value1, value2) {
+    let answer = operator(value1, value2)
     return answer
 }
 
@@ -32,9 +30,15 @@ function operate(operator, values) {
 let displayValue = 0;
 
 // Values array
-let values =  [];
 
 let operator = "";
+
+let operand1 = "";
+
+let operand2 = "";
+
+let pressed = false;
+
 
 // DOM Elements
 let display = document.querySelector(".display")
@@ -65,10 +69,11 @@ function removeZero() {
 
 // Number Event Listeners
 btn1.addEventListener("click", () => {
-   removeZero()
-   displayValue += "1";
-   display.textContent = displayValue;
-})
+    removeZero()
+    displayValue += "1";
+    display.textContent = displayValue;
+   }
+   )   
 
 btn2.addEventListener("click", () => {
     removeZero()
@@ -125,20 +130,37 @@ btn0.addEventListener("click", () => {
 
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
-    addValue = Number(displayValue)
-    values.push(`${addValue}`)
-    if (values.length >= 2) {
-        const valuesNums = values.map(str => {
-            return Number(str);
-          });
-        operateValue = operate(operator, valuesNums);
-        display.textContent = operateValue;
+    // pressed = true;
+    // addValue = Number(displayValue)
+    // values.push(`${addValue}`)
+    // if (values.length >= 2) {
+    //     const valuesNums = values.map(str => {
+    //         return Number(str);
+    //       });
+    //     operateValue = operate(operator, valuesNums);
+    //     displayValue = operateValue
+    //     display.textContent = displayValue;
+    // }
+    // else {
+    // operator = add;
+    // displayValue = "0";
+    // display.textContent = displayValue;
+    // }
+    if (pressed === false)
+    {
+        operand1 = Number(displayValue)
+        pressed = true
+        operator = add;
+        displayValue = "0";
+        display.textContent = displayValue;
     }
     else {
-    operator = add;
-    displayValue = "0";
-    display.textContent = displayValue;
+        operand2 = Number(displayValue)
+        operateValue = operate(operator, operand1, operand2);
+        displayValue = operateValue
+        display.textContent = displayValue;
     }
+    
 })
 
 btnSubtract.addEventListener("click", () => {
@@ -149,28 +171,28 @@ btnSubtract.addEventListener("click", () => {
             return Number(str);
           });
         operateValue = operate(operator, valuesNums);
-        display.textContent = operateValue;
+        displayValue = operateValue
+        display.textContent = displayValue;
     }
     else {
     operator = subtract;
-    displayValue = "0";
+    // displayValue = "0";
     display.textContent = displayValue;
     }
 })
 
 btnEqual.addEventListener("click", () => {
-    addValue = Number(displayValue)
-    values.push(`${addValue}`)
-    const valuesNums = values.map(str => {
-        return Number(str);
-      });
-    operateValue = operate(operator, valuesNums);
-    display.textContent = operateValue;
+    operand2 = Number(displayValue)
+    operateValue = operate(operator, operand1, operand2);
+    displayValue = operateValue
+    display.textContent = displayValue;
 })
 
 // Display Event Listeners
 btnClear.addEventListener("click", () => {
-    values = [];
+    operator = "";
+    operand1 = ""
+    operand2 = ""
     displayValue = "0"
     display.textContent = displayValue;
 })
