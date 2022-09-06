@@ -131,55 +131,6 @@ btn0.addEventListener("click", () => {
 
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
-    // if(!operand1 && !operand2) {
-    //     operand1 = Number(displayValue)
-    //     display.textContent = "0";
-    // }
-    // else if(operand1 && !operand2) {
-    //     operand2 = Number(displayValue)
-    //     display.textContent = "0";
-    // }
-    // else if(operand1 && !operand2 ) {
-    //     operand1 = Number(displayValue) 
-    // }
-
-    // if(operand1 && operand2) {
-    //     if(!operator) {
-    //         operator = add;
-    //     }
-    //     operateValue = operate(operator, operand1, operand2);
-    //     operand1 = operateValue
-    //     operand2 = "";
-    //     display.textContent = operand1;
-    //     operator= "";
-    // }
-
-    // if(values.length === 0)
-    // {
-    //     values.push(displayValue, add);
-    //     display.textContent = "0";
-    //     // history.textContent = `${displayValue} +`;
-    // }
-    // else if(values.length === 1) {
-    //     values.push(add, displayValue);
-    //     let value1 = Number(values[0])
-    //     console.log(value1);
-    //     let value2 = Number(values[2])
-    //     operateValue = operate(values[1], value1, value2)
-    //     display.textContent = operateValue;
-    //     values = [operateValue]
-    // }
-    // else if(values.length === 2) {
-    //     values.push(displayValue)
-    //     console.log(values);
-    //     let value1 = Number(values[0])
-    //     console.log(value1);
-    //     let value2 = Number(values[2])
-    //     operateValue = operate(values[1], value1, value2)
-    //     display.textContent = operateValue;
-    //     values = [operateValue]
-    //     console.log(values);
-    // }
     if(values.length < 1) {
         let value = Number(displayValue)
         values.push(value)
@@ -201,58 +152,6 @@ btnAdd.addEventListener("click", () => {
 })
 
 btnSubtract.addEventListener("click", () => {
-    // if(!operand1 && !operand2) {
-    //     operand1 = Number(displayValue)
-    //     display.textContent = "0";
-    // }
-    // else if(operand1 && !operand2) {
-    //     operand2 = Number(displayValue)
-    //     display.textContent = "0";
-    // }
-    // else if(operand1 && !operand2 ) {
-    //     operand1 = Number(displayValue) 
-    // }
-
-    // if(operand1 && operand2) {
-    //     if(!operator) {
-    //         operator = subtract;
-    //     }
-    //     operateValue = operate(operator, operand1, operand2);
-    //     operand1 = operateValue
-    //     operand2 = "";
-    //     display.textContent = operand1;
-    //     operator= "";
-    // }
-
-
-    // if(values.length === 0)
-    // {
-    //     values.push(displayValue, subtract);
-    //     display.textContent = "0";
-    //     console.log(values);
-    // }
-    // else if(values.length === 1) {
-    //     values.push(subtract, displayValue);
-    //     let value1 = Number(values[0])
-    //     console.log(value1);
-    //     let value2 = Number(values[2])
-    //     operateValue = operate(values[1], value1, value2)
-    //     display.textContent = operateValue;
-    //     values = [operateValue]
-    //     console.log(values);
-    // }
-    // else if(values.length === 2) {
-    //     values.push(displayValue)
-    //     console.log(values);
-    //     let value1 = Number(values[0])
-    //     console.log(value1);
-    //     let value2 = Number(values[2])
-    //     operateValue = operate(values[1], value1, value2)
-    //     display.textContent = operateValue;
-    //     values = [operateValue]
-    //     console.log(values);
-    // }
-
     if(values.length < 1) {
         let value = Number(displayValue)
         values.push(value)
@@ -273,13 +172,37 @@ btnSubtract.addEventListener("click", () => {
     } 
 })
 
-btnEqual.addEventListener("click", () => {
-    if(!operand2) {
-        operand2 = Number(displayValue)
+btnMultiply.addEventListener("click", () => {
+    if(values.length < 1) {
+        let value = Number(displayValue)
+        values.push(value)
+        operators.push(multiply)
+        display.textContent = 0;
     }
-    operateValue = operate(operator, operand1, operand2);
-    displayValue = operateValue
-    display.textContent = displayValue;
+    else if(values.length >=1) {
+        operators.push(multiply)
+        let value = Number(displayValue)
+        values.push(value)
+        console.log(operators);
+        console.log(values);
+        operateValue = operate(operators[0],values[0], values[1])
+        console.log(operateValue);
+        values = [operateValue]
+        operators.shift()
+        display.textContent = values[0];
+    } 
+})
+
+btnEqual.addEventListener("click", () => {
+    let value = Number(displayValue)
+    values.push(value)
+    console.log(operators);
+    console.log(values);
+    operateValue = operate(operators[0],values[0], values[1])
+    console.log(operateValue);
+    values = [operateValue]
+    operators.shift()
+    display.textContent = values[0];
 })
 
 // Display Event Listeners
