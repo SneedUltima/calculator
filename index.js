@@ -33,6 +33,8 @@ let displayValue = "";
 
 let values = [];
 
+let operators = [];
+
 let zeroGone = false;
 
 // DOM Elements
@@ -151,32 +153,51 @@ btnAdd.addEventListener("click", () => {
     //     display.textContent = operand1;
     //     operator= "";
     // }
-    if(values.length === 0)
-    {
-        values.push(displayValue, add);
-        display.textContent = "0";
-        // history.textContent = `${displayValue} +`;
+
+    // if(values.length === 0)
+    // {
+    //     values.push(displayValue, add);
+    //     display.textContent = "0";
+    //     // history.textContent = `${displayValue} +`;
+    // }
+    // else if(values.length === 1) {
+    //     values.push(add, displayValue);
+    //     let value1 = Number(values[0])
+    //     console.log(value1);
+    //     let value2 = Number(values[2])
+    //     operateValue = operate(values[1], value1, value2)
+    //     display.textContent = operateValue;
+    //     values = [operateValue]
+    // }
+    // else if(values.length === 2) {
+    //     values.push(displayValue)
+    //     console.log(values);
+    //     let value1 = Number(values[0])
+    //     console.log(value1);
+    //     let value2 = Number(values[2])
+    //     operateValue = operate(values[1], value1, value2)
+    //     display.textContent = operateValue;
+    //     values = [operateValue]
+    //     console.log(values);
+    // }
+    if(values.length < 1) {
+        let value = Number(displayValue)
+        values.push(value)
+        operators.push(add)
+        display.textContent = 0;
     }
-    else if(values.length === 1) {
-        values.push(add, displayValue);
-        let value1 = Number(values[0])
-        console.log(value1);
-        let value2 = Number(values[2])
-        operateValue = operate(values[1], value1, value2)
-        display.textContent = operateValue;
-        values = [operateValue]
-    }
-    else if(values.length === 2) {
-        values.push(displayValue)
+    else if(values.length >=1) {
+        operators.push(add)
+        let value = Number(displayValue)
+        values.push(value)
+        console.log(operators);
         console.log(values);
-        let value1 = Number(values[0])
-        console.log(value1);
-        let value2 = Number(values[2])
-        operateValue = operate(values[1], value1, value2)
-        display.textContent = operateValue;
+        operateValue = operate(operators[0],values[0], values[1])
+        console.log(operateValue);
         values = [operateValue]
-        console.log(values);
-    }
+        operators.shift()
+        display.textContent = values[0];
+    } 
 })
 
 btnSubtract.addEventListener("click", () => {
@@ -202,33 +223,54 @@ btnSubtract.addEventListener("click", () => {
     //     display.textContent = operand1;
     //     operator= "";
     // }
-    if(values.length === 0)
-    {
-        values.push(displayValue, subtract);
-        display.textContent = "0";
-        console.log(values);
+
+
+    // if(values.length === 0)
+    // {
+    //     values.push(displayValue, subtract);
+    //     display.textContent = "0";
+    //     console.log(values);
+    // }
+    // else if(values.length === 1) {
+    //     values.push(subtract, displayValue);
+    //     let value1 = Number(values[0])
+    //     console.log(value1);
+    //     let value2 = Number(values[2])
+    //     operateValue = operate(values[1], value1, value2)
+    //     display.textContent = operateValue;
+    //     values = [operateValue]
+    //     console.log(values);
+    // }
+    // else if(values.length === 2) {
+    //     values.push(displayValue)
+    //     console.log(values);
+    //     let value1 = Number(values[0])
+    //     console.log(value1);
+    //     let value2 = Number(values[2])
+    //     operateValue = operate(values[1], value1, value2)
+    //     display.textContent = operateValue;
+    //     values = [operateValue]
+    //     console.log(values);
+    // }
+
+    if(values.length < 1) {
+        let value = Number(displayValue)
+        values.push(value)
+        operators.push(subtract)
+        display.textContent = 0;
     }
-    else if(values.length === 1) {
-        values.push(subtract, displayValue);
-        let value1 = Number(values[0])
-        console.log(value1);
-        let value2 = Number(values[2])
-        operateValue = operate(values[1], value1, value2)
-        display.textContent = operateValue;
+    else if(values.length >=1) {
+        operators.push(subtract)
+        let value = Number(displayValue)
+        values.push(value)
+        console.log(operators);
+        console.log(values);
+        operateValue = operate(operators[0],values[0], values[1])
+        console.log(operateValue);
         values = [operateValue]
-        console.log(values);
-    }
-    else if(values.length === 2) {
-        values.push(displayValue)
-        console.log(values);
-        let value1 = Number(values[0])
-        console.log(value1);
-        let value2 = Number(values[2])
-        operateValue = operate(values[1], value1, value2)
-        display.textContent = operateValue;
-        values = [operateValue]
-        console.log(values);
-    }
+        operators.shift()
+        display.textContent = values[0];
+    } 
 })
 
 btnEqual.addEventListener("click", () => {
