@@ -31,16 +31,13 @@ let displayValue = "";
 
 // Values array
 
-let operator = "";
-
-let operand1 
-
-let operand2
+let values = [];
 
 let zeroGone = false;
 
 // DOM Elements
-let display = document.querySelector(".display")
+let history = document.querySelector(".history")
+let display = document.querySelector(".value-display")
 const btn1 = document.querySelector("#btn-1")
 const btn2 = document.querySelector("#btn-2")
 const btn3 = document.querySelector("#btn-3")
@@ -63,7 +60,7 @@ function removeZero() {
     if(display.textContent === "0") {
         displayValue = "";
     }
-    if(operand1) {
+    if(values.length === 1) {
         displayValue = "";
     }
     return;
@@ -132,55 +129,106 @@ btn0.addEventListener("click", () => {
 
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
-    if(!operand1 && !operand2) {
-        operand1 = Number(displayValue)
-        display.textContent = "0";
-    }
-    else if(operand1 && !operand2) {
-        operand2 = Number(displayValue)
-        display.textContent = "0";
-    }
-    else if(operand1 && !operand2 ) {
-        operand1 = Number(displayValue) 
-    }
+    // if(!operand1 && !operand2) {
+    //     operand1 = Number(displayValue)
+    //     display.textContent = "0";
+    // }
+    // else if(operand1 && !operand2) {
+    //     operand2 = Number(displayValue)
+    //     display.textContent = "0";
+    // }
+    // else if(operand1 && !operand2 ) {
+    //     operand1 = Number(displayValue) 
+    // }
 
-    if(operand1 && operand2) {
-        if(!operator) {
-            operator = add;
-        }
-        operateValue = operate(operator, operand1, operand2);
-        operand1 = operateValue
-        operand2 = "";
-        display.textContent = operand1;
-        operator= "";
+    // if(operand1 && operand2) {
+    //     if(!operator) {
+    //         operator = add;
+    //     }
+    //     operateValue = operate(operator, operand1, operand2);
+    //     operand1 = operateValue
+    //     operand2 = "";
+    //     display.textContent = operand1;
+    //     operator= "";
+    // }
+    if(values.length === 0)
+    {
+        values.push(displayValue, add);
+        display.textContent = "0";
+        // history.textContent = `${displayValue} +`;
     }
-    
+    else if(values.length === 1) {
+        values.push(add, displayValue);
+        let value1 = Number(values[0])
+        console.log(value1);
+        let value2 = Number(values[2])
+        operateValue = operate(values[1], value1, value2)
+        display.textContent = operateValue;
+        values = [operateValue]
+    }
+    else if(values.length === 2) {
+        values.push(displayValue)
+        console.log(values);
+        let value1 = Number(values[0])
+        console.log(value1);
+        let value2 = Number(values[2])
+        operateValue = operate(values[1], value1, value2)
+        display.textContent = operateValue;
+        values = [operateValue]
+        console.log(values);
+    }
 })
 
 btnSubtract.addEventListener("click", () => {
-    if(!operand1 && !operand2) {
-        operand1 = Number(displayValue)
-        display.textContent = "0";
-    }
-    else if(operand1 && !operand2) {
-        operand2 = Number(displayValue)
-        display.textContent = "0";
-    }
-    else if(operand1 && !operand2 ) {
-        operand1 = Number(displayValue) 
-    }
+    // if(!operand1 && !operand2) {
+    //     operand1 = Number(displayValue)
+    //     display.textContent = "0";
+    // }
+    // else if(operand1 && !operand2) {
+    //     operand2 = Number(displayValue)
+    //     display.textContent = "0";
+    // }
+    // else if(operand1 && !operand2 ) {
+    //     operand1 = Number(displayValue) 
+    // }
 
-    if(operand1 && operand2) {
-        if(!operator) {
-            operator = subtract;
-        }
-        operateValue = operate(operator, operand1, operand2);
-        operand1 = operateValue
-        operand2 = "";
-        display.textContent = operand1;
-        operator= "";
+    // if(operand1 && operand2) {
+    //     if(!operator) {
+    //         operator = subtract;
+    //     }
+    //     operateValue = operate(operator, operand1, operand2);
+    //     operand1 = operateValue
+    //     operand2 = "";
+    //     display.textContent = operand1;
+    //     operator= "";
+    // }
+    if(values.length === 0)
+    {
+        values.push(displayValue, subtract);
+        display.textContent = "0";
+        console.log(values);
     }
-    
+    else if(values.length === 1) {
+        values.push(subtract, displayValue);
+        let value1 = Number(values[0])
+        console.log(value1);
+        let value2 = Number(values[2])
+        operateValue = operate(values[1], value1, value2)
+        display.textContent = operateValue;
+        values = [operateValue]
+        console.log(values);
+    }
+    else if(values.length === 2) {
+        values.push(displayValue)
+        console.log(values);
+        let value1 = Number(values[0])
+        console.log(value1);
+        let value2 = Number(values[2])
+        operateValue = operate(values[1], value1, value2)
+        display.textContent = operateValue;
+        values = [operateValue]
+        console.log(values);
+    }
 })
 
 btnEqual.addEventListener("click", () => {
@@ -197,7 +245,9 @@ btnClear.addEventListener("click", () => {
     operator = "";
     operand1 = "";
     operand2 = "";
+    values = [];
     displayValue = "0";
     display.textContent = displayValue;
+    history.textContent = "";
 })
 
