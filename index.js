@@ -193,6 +193,27 @@ btnMultiply.addEventListener("click", () => {
     } 
 })
 
+btnDivide.addEventListener("click", () => {
+    if(values.length < 1) {
+        let value = Number(displayValue)
+        values.push(value)
+        operators.push(divide)
+        display.textContent = 0;
+    }
+    else if(values.length >=1) {
+        operators.push(divide)
+        let value = Number(displayValue)
+        values.push(value)
+        console.log(operators);
+        console.log(values);
+        operateValue = operate(operators[0],values[0], values[1])
+        console.log(operateValue);
+        values = [operateValue]
+        operators.shift()
+        display.textContent = values[0];
+    } 
+})
+
 btnEqual.addEventListener("click", () => {
     let value = Number(displayValue)
     values.push(value)
@@ -207,10 +228,8 @@ btnEqual.addEventListener("click", () => {
 
 // Display Event Listeners
 btnClear.addEventListener("click", () => {
-    operator = "";
-    operand1 = "";
-    operand2 = "";
     values = [];
+    operators = [];
     displayValue = "0";
     display.textContent = displayValue;
     history.textContent = "";
