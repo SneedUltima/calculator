@@ -131,77 +131,30 @@ btn0.addEventListener("click", () => {
 
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
-    if(values.length < 1) {
-        let value = Number(displayValue)
-        values.push(value)
-        operators.push(add)
-        display.textContent = 0;
-    }
-    else if(values.length >=1) {
-        operators.push(add)
-        let value = Number(displayValue)
-        values.push(value)
-        console.log(operators);
-        console.log(values);
-        operateValue = operate(operators[0],values[0], values[1])
-        console.log(operateValue);
-        values = [operateValue]
-        operators.shift()
-        display.textContent = values[0];
-    } 
+    displayCalculate(add);
 })
 
 btnSubtract.addEventListener("click", () => {
-    if(values.length < 1) {
-        let value = Number(displayValue)
-        values.push(value)
-        operators.push(subtract)
-        display.textContent = 0;
-    }
-    else if(values.length >=1) {
-        operators.push(subtract)
-        let value = Number(displayValue)
-        values.push(value)
-        console.log(operators);
-        console.log(values);
-        operateValue = operate(operators[0],values[0], values[1])
-        console.log(operateValue);
-        values = [operateValue]
-        operators.shift()
-        display.textContent = values[0];
-    } 
+    displayCalculate(subtract)
 })
 
 btnMultiply.addEventListener("click", () => {
-    if(values.length < 1) {
-        let value = Number(displayValue)
-        values.push(value)
-        operators.push(multiply)
-        display.textContent = 0;
-    }
-    else if(values.length >=1) {
-        operators.push(multiply)
-        let value = Number(displayValue)
-        values.push(value)
-        console.log(operators);
-        console.log(values);
-        operateValue = operate(operators[0],values[0], values[1])
-        console.log(operateValue);
-        values = [operateValue]
-        operators.shift()
-        display.textContent = values[0];
-    } 
+    displayCalculate(multiply);
 })
 
 btnDivide.addEventListener("click", () => {
+    displayCalculate(divide)
+})
+
+function displayCalculate(operand){
     if(values.length < 1) {
         let value = Number(displayValue)
         values.push(value)
-        operators.push(divide)
+        operators.push(operand)
         display.textContent = 0;
     }
     else if(values.length >=1) {
-        operators.push(divide)
+        operators.push(operand)
         let value = Number(displayValue)
         values.push(value)
         console.log(operators);
@@ -212,7 +165,8 @@ btnDivide.addEventListener("click", () => {
         operators.shift()
         display.textContent = values[0];
     } 
-})
+    
+}
 
 btnEqual.addEventListener("click", () => {
     let value = Number(displayValue)
@@ -225,6 +179,7 @@ btnEqual.addEventListener("click", () => {
     operators.shift()
     display.textContent = values[0];
 })
+
 
 // Display Event Listeners
 btnClear.addEventListener("click", () => {
