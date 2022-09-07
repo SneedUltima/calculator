@@ -131,29 +131,32 @@ btn0.addEventListener("click", () => {
 
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
-    displayCalculate(add);
+    displayCalculate(add," + ");
 })
 
 btnSubtract.addEventListener("click", () => {
-    displayCalculate(subtract)
+    displayCalculate(subtract, " - ")
 })
 
 btnMultiply.addEventListener("click", () => {
-    displayCalculate(multiply);
+    displayCalculate(multiply, " * ");
 })
 
 btnDivide.addEventListener("click", () => {
-    displayCalculate(divide)
+    displayCalculate(divide, " / ")
 })
 
-function displayCalculate(operand){
+function displayCalculate(operand, operandSymbol){
     if(values.length < 1) {
+        history.textContent = `${displayValue}${operandSymbol}`
         let value = Number(displayValue)
         values.push(value)
         operators.push(operand)
         display.textContent = 0;
+        
     }
     else if(values.length >=1) {
+        history.textContent += `${displayValue}${operandSymbol}`
         operators.push(operand)
         let value = Number(displayValue)
         values.push(value)
@@ -174,6 +177,7 @@ btnEqual.addEventListener("click", () => {
     console.log(operators);
     console.log(values);
     operateValue = operate(operators[0],values[0], values[1])
+    history.textContent += `${displayValue} = ${operateValue}`
     console.log(operateValue);
     values = [operateValue]
     operators.shift()
