@@ -29,13 +29,14 @@ function operate(operator, value1, value2) {
 // Initiliase display 
 let displayValue = "";
 
-// Values array
+// Variable to keep track whether operator has been pressed to correctly clear the display
+let operatorPressed = ""
 
+// Values array
 let values = [];
 
+// Operators Array
 let operators = [];
-
-let zeroGone = false;
 
 // DOM Elements
 let history = document.querySelector(".history")
@@ -62,8 +63,9 @@ function removeZero() {
     if(display.textContent === "0") {
         displayValue = "";
     }
-    if(values.length === 1) {
+    if(operatorPressed) {
         displayValue = "";
+        operatorPressed = ""
     }
     return;
 }
@@ -147,6 +149,7 @@ btnDivide.addEventListener("click", () => {
 })
 
 function displayCalculate(operand, operandSymbol){
+    operatorPressed = true;
     if(values.length < 1) {
         history.textContent = `${displayValue}${operandSymbol}`
         let value = Number(displayValue)
