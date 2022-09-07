@@ -192,7 +192,7 @@ btnEqual.addEventListener("click", () => {
     values.push(value)
     operateValue = operate(operators[0],values[0], values[1])
     operateValue = +operateValue.toFixed(5);
-    history.textContent += `${displayValue} = ${operateValue}`
+    history.textContent += `${displayValue} = `
     values = [operateValue]
     operators.shift()
     display.textContent = values[0];
