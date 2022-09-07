@@ -56,7 +56,9 @@ const btnSubtract = document.querySelector("#btn-subtract")
 const btnMultiply = document.querySelector("#btn-multiply")
 const btnDivide = document.querySelector("#btn-divide")
 const btnEqual = document.querySelector("#btn-equal")
+const btnDelete = document.querySelector("#btn-delete")
 const btnClear = document.querySelector("#btn-clear")
+
 
 // Function to clear display when number input
 function removeZero() {
@@ -183,6 +185,12 @@ btnEqual.addEventListener("click", () => {
     display.textContent = values[0];
 })
 
+btnDelete.addEventListener("click", () => {
+    if(displayValue) {
+        displayValue = displayValue.slice(0, -1);
+        display.textContent = displayValue;
+    }
+})
 
 // Display Event Listeners
 btnClear.addEventListener("click", () => {
