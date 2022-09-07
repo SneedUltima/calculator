@@ -163,10 +163,8 @@ function displayCalculate(operand, operandSymbol){
         operators.push(operand)
         let value = Number(displayValue)
         values.push(value)
-        console.log(operators);
-        console.log(values);
         operateValue = operate(operators[0],values[0], values[1])
-        console.log(operateValue);
+        operateValue = +operateValue.toFixed(5);
         values = [operateValue]
         operators.shift()
         display.textContent = values[0];
@@ -177,11 +175,9 @@ function displayCalculate(operand, operandSymbol){
 btnEqual.addEventListener("click", () => {
     let value = Number(displayValue)
     values.push(value)
-    console.log(operators);
-    console.log(values);
     operateValue = operate(operators[0],values[0], values[1])
+    operateValue = +operateValue.toFixed(5);
     history.textContent += `${displayValue} = ${operateValue}`
-    console.log(operateValue);
     values = [operateValue]
     operators.shift()
     display.textContent = values[0];
