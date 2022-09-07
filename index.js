@@ -192,5 +192,6 @@ btnClear.addEventListener("click", () => {
     displayValue = "0";
     display.textContent = displayValue;
     history.textContent = "";
+    history.innerHTML += '&nbsp;';
 })
 
