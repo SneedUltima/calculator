@@ -32,6 +32,9 @@ let displayValue = "";
 // Variable to keep track whether operator has been pressed to correctly clear the display
 let operatorPressed = ""
 
+// Variable to keep track whether the decimal button has already been pressed
+let decimalPressed = ""
+
 // Values array
 let values = [];
 
@@ -51,6 +54,7 @@ const btn7 = document.querySelector("#btn-7")
 const btn8 = document.querySelector("#btn-8")
 const btn9 = document.querySelector("#btn-9")
 const btn0 = document.querySelector("#btn-0")
+const btnDecimal = document.querySelector("#btn-decimal")
 const btnAdd = document.querySelector("#btn-add")
 const btnSubtract = document.querySelector("#btn-subtract")
 const btnMultiply = document.querySelector("#btn-multiply")
@@ -152,6 +156,7 @@ btnDivide.addEventListener("click", () => {
 
 function displayCalculate(operand, operandSymbol){
     operatorPressed = true;
+    decimalPressed = "";
     if(values.length < 1) {
         history.textContent = `${displayValue}${operandSymbol}`
         let value = Number(displayValue)
@@ -174,6 +179,14 @@ function displayCalculate(operand, operandSymbol){
     
 }
 
+btnDecimal.addEventListener("click", () => {
+    if(displayValue && !decimalPressed) {
+        displayValue += ".";
+        display.textContent = displayValue;
+        decimalPressed = true;
+    }
+})
+
 btnEqual.addEventListener("click", () => {
     let value = Number(displayValue)
     values.push(value)
@@ -183,6 +196,7 @@ btnEqual.addEventListener("click", () => {
     values = [operateValue]
     operators.shift()
     display.textContent = values[0];
+    decimalPressed = "";
 })
 
 btnDelete.addEventListener("click", () => {
@@ -200,5 +214,6 @@ btnClear.addEventListener("click", () => {
     display.textContent = displayValue;
     history.textContent = "";
     history.innerHTML += '&nbsp;';
+    decimalPressed = "";
 })
 
