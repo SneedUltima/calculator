@@ -77,66 +77,33 @@ function removeZero() {
     return;
 }
 
+// Function that takes number input and displays value
+function numberEvent(value) {
+    removeZero()
+    displayValue += `${value}`;
+    display.textContent = displayValue; 
+}
+
 // Number Button Event Listeners
-btn1.addEventListener("click", () => {
-    removeZero()
-    displayValue += "1";
-    display.textContent = displayValue;
-   }
-   )   
+btn1.addEventListener("click", () => numberEvent(1))  
 
-btn2.addEventListener("click", () => {
-    removeZero()
-    displayValue += "2";
-    display.textContent = displayValue;
- })
+btn2.addEventListener("click", () => numberEvent(2))  
 
-btn3.addEventListener("click", () => {
-    removeZero()
-    displayValue += "3";
-    display.textContent = displayValue;
- })
+btn3.addEventListener("click", () => numberEvent(3))   
 
-btn4.addEventListener("click", () => {
-    removeZero()
-    displayValue += "4";
-    display.textContent = displayValue;
- })
+btn4.addEventListener("click", () => numberEvent(4))   
 
-btn5.addEventListener("click", () => {
-    removeZero()
-    displayValue += "5";
-    display.textContent = displayValue;
- })
+btn5.addEventListener("click", () => numberEvent(5))  
 
-btn6.addEventListener("click", () => {
-    removeZero()
-    displayValue += "6";
-    display.textContent = displayValue;
- })
+btn6.addEventListener("click", () => numberEvent(6))  
 
-btn7.addEventListener("click", () => {
-    removeZero()
-    displayValue += "7";
-    display.textContent = displayValue;
- })
+btn7.addEventListener("click", () => numberEvent(7)) 
 
-btn8.addEventListener("click", () => {
-    removeZero()
-    displayValue += "8";
-    display.textContent = displayValue;
- })
+btn8.addEventListener("click", () => numberEvent(8))
 
-btn9.addEventListener("click", () => {
-    removeZero()
-    displayValue += "9";
-    display.textContent = displayValue;
- })
+btn9.addEventListener("click", () => numberEvent(9)) 
 
-btn0.addEventListener("click", () => {
-    displayValue += "0";
-    display.textContent = displayValue;
- })
+btn0.addEventListener("click", () => numberEvent(0))   
 
 // Math Operator Event Listeners
 btnAdd.addEventListener("click", () => {
@@ -181,15 +148,23 @@ function displayCalculate(operand, operandSymbol){
     
 }
 
-btnDecimal.addEventListener("click", () => {
+// Event listener to calculate input
+btnDecimal.addEventListener("click", () => addDecimal())
+
+// Function to calculate input
+function addDecimal() {
     if(displayValue && !decimalPressed) {
         displayValue += ".";
         display.textContent = displayValue;
         decimalPressed = true;
     }
-})
+}
 
-btnEqual.addEventListener("click", () => {
+// Event listener to calculate input
+btnEqual.addEventListener("click", () => calcEqual())
+
+// Function to calculate input
+function calcEqual() {
     let value = Number(displayValue)
     values.push(value)
     operateValue = operate(operators[0],values[0], values[1])
@@ -199,10 +174,13 @@ btnEqual.addEventListener("click", () => {
     operators.shift()
     display.textContent = values[0];
     decimalPressed = "";
-})
+}
 
-// Event listener to add decimal value
-btnDelete.addEventListener("click", () => {
+// Event listener to delete last value
+btnDelete.addEventListener("click", () => deleteValue())
+
+// Function to delete last value
+function deleteValue() {
     if(displayValue) {
         displayValue = displayValue.slice(0, -1);
         display.textContent = displayValue;
@@ -210,10 +188,14 @@ btnDelete.addEventListener("click", () => {
     if(!displayValue) {
         display.textContent = "0";
     }
-})
+}
+
 
 // Event listener to clear display
-btnClear.addEventListener("click", () => {
+btnClear.addEventListener("click", () => clearDisplay())
+
+// Function to clear display
+function clearDisplay() {
     values = [];
     operators = [];
     displayValue = "0";
@@ -221,5 +203,32 @@ btnClear.addEventListener("click", () => {
     history.textContent = "";
     history.innerHTML += '&nbsp;';
     decimalPressed = "";
-})
+}
 
+// **** KEYBOARD SUPPORT FUNCTIONS **** //
+
+window.addEventListener('keydown', keyboardSupport)
+
+// Function to handle keyboard input
+function keyboardSupport(e) {
+    if(e.key === "0") numberEvent(0)
+    if(e.key === "1") numberEvent(1)
+    if(e.key === "2") numberEvent(2)
+    if(e.key === "3") numberEvent(3)
+    if(e.key === "4") numberEvent(4)
+    if(e.key === "5") numberEvent(5)
+    if(e.key === "6") numberEvent(6)
+    if(e.key === "7") numberEvent(7)
+    if(e.key === "8") numberEvent(8)
+    if(e.key === "9") numberEvent(9)
+    if(e.key === ".") addDecimal()
+    if(e.key === "=") calcEqual()
+    if(e.key === "Enter") calcEqual()
+    if(e.key === "Delete") clearDisplay()
+    if(e.key === "Backspace") deleteValue()
+    if(e.key === "+") displayCalculate(add," + ");
+    if(e.key === "-") displayCalculate(subtract," - ");
+    if(e.key === "*") displayCalculate(multiply," * ");
+    if(e.key === "/") displayCalculate(divide," / ");
+}
+   
