@@ -26,6 +26,7 @@ function operate(operator, value1, value2) {
 }
 
 // **** DISPLAY FUNCTIONS **** //
+
 // Initiliase display 
 let displayValue = "";
 
@@ -35,10 +36,10 @@ let operatorPressed = ""
 // Variable to keep track whether the decimal button has already been pressed
 let decimalPressed = ""
 
-// Values array
+// Values array to store number values
 let values = [];
 
-// Operators Array
+// Operators Array to store operator values
 let operators = [];
 
 // DOM Elements
@@ -76,7 +77,7 @@ function removeZero() {
     return;
 }
 
-// Number Event Listeners
+// Number Button Event Listeners
 btn1.addEventListener("click", () => {
     removeZero()
     displayValue += "1";
@@ -154,6 +155,7 @@ btnDivide.addEventListener("click", () => {
     displayCalculate(divide, " / ")
 })
 
+// Main function to return and display calculated answer depending on the operator pressed
 function displayCalculate(operand, operandSymbol){
     operatorPressed = true;
     decimalPressed = "";
@@ -199,6 +201,7 @@ btnEqual.addEventListener("click", () => {
     decimalPressed = "";
 })
 
+// Event listener to add decimal value
 btnDelete.addEventListener("click", () => {
     if(displayValue) {
         displayValue = displayValue.slice(0, -1);
@@ -209,7 +212,7 @@ btnDelete.addEventListener("click", () => {
     }
 })
 
-// Display Event Listeners
+// Event listener to clear display
 btnClear.addEventListener("click", () => {
     values = [];
     operators = [];
