@@ -204,6 +204,9 @@ btnDelete.addEventListener("click", () => {
         displayValue = displayValue.slice(0, -1);
         display.textContent = displayValue;
     }
+    if(!displayValue) {
+        display.textContent = "0";
+    }
 })
 
 // Display Event Listeners
